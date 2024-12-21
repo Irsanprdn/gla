@@ -8,6 +8,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\InvestorController;
+use App\Http\Controllers\InvestmentController;
+
+
+
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
@@ -23,9 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('expense', ExpenseController::class);
     Route::resource('bank_account', ProgramController::class);
     Route::resource('employee', ProgramController::class);
-    Route::resource('attendance', ProgramController::class);
-    Route::resource('investment', ProgramController::class);
-    Route::resource('investor', ProgramController::class);
+    Route::resource('attendance', ProgramController::class);    
+    Route::resource('investment', InvestmentController::class);
+    Route::resource('investor', InvestorController::class);
     Route::resource('asset', ProgramController::class);
     Route::resource('loan', ProgramController::class);
     Route::get('user-access', [UserAccessController::class, 'index'])->name('user-access.index');
