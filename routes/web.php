@@ -12,8 +12,8 @@ use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BankAccountController;
-
-
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\LoanController;
 
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('investment', InvestmentController::class);
     Route::resource('investor', InvestorController::class);
     Route::resource('bank_account', BankAccountController::class);
-    Route::resource('asset', ProgramController::class);
-    Route::resource('loan', ProgramController::class);
+    Route::resource('asset', AssetController::class);    
+    Route::resource('loan', LoanController::class);
     Route::get('user-access', [UserAccessController::class, 'index'])->name('user-access.index');
     Route::post('user-access', [UserAccessController::class, 'store'])->name('user-access.store');
 });
