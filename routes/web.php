@@ -6,6 +6,8 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserAccessController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ExpenseController;
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
@@ -17,8 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('', [DashboardController::class,'index'])->name('dashboard');    
     Route::resource('users', UserController::class);
     Route::resource('programs', ProgramController::class);
-    Route::resource('income', ProgramController::class);
-    Route::resource('expense', ProgramController::class);
+    Route::resource('income', IncomeController::class);
+    Route::resource('expense', ExpenseController::class);
     Route::resource('bank_account', ProgramController::class);
     Route::resource('employee', ProgramController::class);
     Route::resource('attendance', ProgramController::class);
