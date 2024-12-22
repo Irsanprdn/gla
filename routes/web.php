@@ -18,14 +18,14 @@ use App\Http\Controllers\LoanController;
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
-Route::get('register', [AuthController::class, 'registerForm'])->name('register');
-Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('', [DashboardController::class,'index'])->name('dashboard');    
     Route::resource('users', UserController::class);
     Route::resource('programs', ProgramController::class);
+    Route::get('user-access', [UserAccessController::class, 'index'])->name('user-access.index');
+    Route::post('user-access', [UserAccessController::class, 'store'])->name('user-access.store');
     Route::resource('income', IncomeController::class);
     Route::resource('expense', ExpenseController::class);
     Route::resource('bank_account', ProgramController::class);
@@ -35,8 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('investor', InvestorController::class);
     Route::resource('bank_account', BankAccountController::class);
     Route::resource('asset', AssetController::class);    
-    Route::resource('loan', LoanController::class);
-    Route::get('user-access', [UserAccessController::class, 'index'])->name('user-access.index');
-    Route::post('user-access', [UserAccessController::class, 'store'])->name('user-access.store');
+    Route::resource('loan', LoanController::class);    
 });
 
