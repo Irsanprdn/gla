@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Investment extends Model
 {
     use HasFactory;
-    protected $table = 'investment';
+    protected $table = 'investments';
     protected $fillable = [
         'name' ,
         'amount' ,

@@ -12,8 +12,6 @@ use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\InvestmentController;
 
 
-
-
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'registerForm'])->name('register');
@@ -35,5 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('loan', ProgramController::class);
     Route::get('user-access', [UserAccessController::class, 'index'])->name('user-access.index');
     Route::post('user-access', [UserAccessController::class, 'store'])->name('user-access.store');
+
+    Route::put('/investors/update/{investor}', [InvestorController::class, 'update'])->name('investors.update');
+    Route::get('/investors/create', [InvestorController::class, 'create'])->name('investors.create');
+    Route::get('/investors/edit/{investor}', [InvestorController::class, 'edit'])->name('investors.edit');
+    Route::get('/investors/index', [InvestorController::class, 'index'])->name('investors.index');
+    Route::delete('/investors/destroy/{investor}', [InvestorController::class, 'destroy'])->name('investors.destroy');
+    Route::post('/investors/store', [InvestorController::class, 'store'])->name('investors.store');
+
+    Route::get('/investments/create', [InvestorController::class, 'create'])->name('investments.create');
+    Route::get('/investments/edit', [InvestorController::class, 'edit'])->name('investments.edit');
+    Route::get('/investments/destroy', [InvestorController::class, 'destroy'])->name('investments.destroy');
 });
 
