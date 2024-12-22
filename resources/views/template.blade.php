@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="/assets/compiled/css/app.css">
     <link rel="stylesheet" href="/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="/assets/compiled/css/iconly.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.16/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.16/dist/sweetalert2.min.js"></script>
+
     
     <style>
         #chart-pemasukan-pengeluaran {
