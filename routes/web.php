@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('bank_account', ProgramController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('attendance', ProgramController::class);    
-    Route::resource('investment', InvestmentController::class);
-    Route::resource('investor', InvestorController::class);
+    Route::resource('investments', InvestmentController::class);
+    Route::resource('investors', InvestorController::class);
     Route::resource('bank_account', BankAccountController::class);
     Route::resource('asset', AssetController::class);    
     Route::resource('loan', LoanController::class);    
