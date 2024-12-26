@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::post('user-access', [UserAccessController::class, 'store'])->name('user-access.store');
     Route::resource('income', IncomeController::class);
     Route::resource('expense', ExpenseController::class);
-    // Route::resource('bank_account', ProgramController::class);
+    Route::resource('bank_account', ProgramController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('attendance', ProgramController::class);    
     Route::resource('investments', InvestmentController::class);
