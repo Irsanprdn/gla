@@ -21,5 +21,10 @@ class BankAccount extends Model
         'account_name',
         'bank_id'
     ];
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'id_bank');
+    }
 }
 

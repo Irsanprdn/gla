@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bank_accounts', function (Blueprint $table) {
-            $table->dropColumn(['branch_name', 'balance']); // Menghapus kolom branch_name dan balance
-            $table->unsignedBigInteger('bank_id')->after('account_name'); // Menambah kolom bank_id
-            $table->dropColumn('bank_name'); // Menghapus kolom bank_name
+        Schema::table('expenses', function (Blueprint $table) {
+            // Hapus semua kolom kecuali id
+            $table->dropColumn(['bank_id']);
+
+            $table->unsignedBigInteger('bank_account_id'); // Tambahkan kolom bank_id
         });
     }
 
