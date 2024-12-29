@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\BankAccount;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,9 @@ class BankAccountController extends Controller
 {
     public function index()
     {
-        $bankAccounts = BankAccount::all();
+        $bankAccounts = BankAccount::leftJoin('bank', function ($join) {
+            $join->on('bank.id_bank', '=', 'bank_accounts.bank_id');
+        })->get();        
         return view('bank_account.index', compact('bankAccounts'));
     }
 
@@ -20,13 +23,7 @@ class BankAccountController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'account_number' => 'required|string|max:255',
-            'account_name' => 'required|string|max:255',
-            'bank_name' => 'required|string|max:255',
-            'branch_name' => 'nullable|string|max:255',
-            'balance' => 'nullable|numeric|min:0',
-        ]);
+        
 
         BankAccount::create($request->all());
 
@@ -45,13 +42,7 @@ class BankAccountController extends Controller
 
     public function update(Request $request, BankAccount $bankAccount)
     {
-        $request->validate([
-            'account_number' => 'required|string|max:255',
-            'account_name' => 'required|string|max:255',
-            'bank_name' => 'required|string|max:255',
-            'branch_name' => 'nullable|string|max:255',
-            'balance' => 'nullable|numeric|min:0',
-        ]);
+        
 
         $bankAccount->update($request->all());
 

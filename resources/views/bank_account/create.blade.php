@@ -1,6 +1,6 @@
 @extends('template') <!-- Menggunakan layout app.blade.php -->
 
-@section('title', 'Add Investor')
+@section('title', 'Create Bank Account')
 @section('css')
 
 @endsection
@@ -21,20 +21,25 @@
                     </div>
                 </div>
             </div>
-        <div class="card-body">
-            <div>
-                <label for="account_number">Account Number:</label>
-                <input type="text" class="form-control" name="account_number" required autocomplete="off">
-            </div><br>
-            <div>
-                <label for="account_name">Account Name:</label>
-                <input type="text" class="form-control" name="account_name" required autocomplete="off">
-            </div><br>
-            <div>
-                <label for="bank_name">Bank Name:</label>
-                <input type="text" class="form-control" name="bank_name" required autocomplete="off">
-            </div><br>
-        </div>
+            <div class="card-body">
+                <div>
+                    <label for="account_number">Account Number:</label>
+                    <input type="text" class="form-control" oninput="this.value = this.value.replace(/\D/g, '')"  name="account_number" required autocomplete="off">
+                </div><br>
+                <div>
+                    <label for="account_name">Account Name:</label>
+                    <input type="text" class="form-control" name="account_name" required autocomplete="off">
+                </div><br>
+                <div>
+                    <label for="bank_id">Bank Name:</label>
+                    <select class="form-control" name="bank_id">
+                        <option value="">None</option>
+                        @foreach(\App\Models\Bank::get() as $bank)
+                        <option value="{{ $bank->id_bank }}">{{ $bank->nama_bank }}</option>
+                        @endforeach
+                    </select>
+                </div><br>
+            </div>
 
         </div>
     </form>

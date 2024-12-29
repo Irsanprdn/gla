@@ -11,10 +11,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md">
-                    <h5 class="card-title">List Bank Account</h5>
+                    <h5 class="card-title">List Bank</h5>
                 </div>
                 <div class="col-md-auto">
-                    <a href="{{ route('bank_account.create') }}" class="btn btn-info">Create Bank Account</a>
+                    <a href="{{ route('banks.create') }}" class="btn btn-info">Create Bank</a>
                 </div>
             </div>
         </div>
@@ -23,21 +23,19 @@
                 <table class="table" id="table1">
                     <thead>
                         <tr>
-                            <th>Account Number</th>
-                            <th>Account Name</th>
                             <th>Bank Name</th>
+                            <th>Bank Code</th>                        
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($bankAccounts as $bank_accounts)
+                        @foreach($banks as $bank)
                         <tr>
-                            <td>{{ $bank_accounts->account_number }}</td>
-                            <td>{{ $bank_accounts->account_name }}</td>
-                            <td>{{ $bank_accounts->nama_bank }}</td>
+                            <td>{{ $bank->nama_bank }}</td>
+                            <td>{{ $bank->kode_bank }}</td>                            
                             <td>
-                                <a class="btn btn-warning" href="{{ route('bank_account.edit', $bank_accounts->id) }}">Edit</a>
-                                <form action="{{ route('bank_account.destroy', $bank_accounts->id) }}" method="POST" style="display:inline;">
+                                <a class="btn btn-warning" href="{{ route('banks.edit', $bank->id_bank) }}">Edit</a>
+                                <form action="{{ route('banks.destroy', $bank->id_bank) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
