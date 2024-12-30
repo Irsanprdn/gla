@@ -10,7 +10,12 @@ class AssetController extends Controller
     public function index()
     {
         $assets = Asset::all();
-        return response()->json($assets);
+        return view('asset.index', compact('assets'));
+    }
+
+    public function create()
+    {
+        return view('asset.create');
     }
 
     public function store(Request $request)
@@ -22,13 +27,18 @@ class AssetController extends Controller
         ]);
 
         $asset = Asset::create($request->all());
-        return response()->json($asset, 201);
+        return redirect()->route('asset.index')->with('success', 'Asset created successfully!');
     }
 
     public function show($id)
     {
         $asset = Asset::findOrFail($id);
-        return response()->json($asset);
+        return view('asset.show', compact('asset'));
+    }
+
+    public function edit(Asset $asset)
+    {
+        return view('asset.edit', compact('asset'));
     }
 
     public function update(Request $request, $id)
@@ -41,13 +51,13 @@ class AssetController extends Controller
 
         $asset = Asset::findOrFail($id);
         $asset->update($request->all());
-        return response()->json($asset);
+        return redirect()->route('asset.index')->with('success', 'Asset updated successfully!');
     }
 
     public function destroy($id)
     {
         $asset = Asset::findOrFail($id);
         $asset->delete();
-        return response()->json(null, 204);
+        return redirect()->route('asset.index')->with('success', 'Asset deleted successfully!');
     }
 }
