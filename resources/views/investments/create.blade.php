@@ -1,63 +1,63 @@
 @extends('template') <!-- Menggunakan layout app.blade.php -->
 
-@section('title', 'Menu')
+@section('title', 'Add Investment')
 @section('css')
 
 @endsection
 
 @section('content')
+<style>
+    /* Menghilangkan panah atas dan bawah */
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
+
 <section class="section">
-    <form action="{{ route('programs.store') }}" method="POST">
+    <form action="{{ route('investments.store') }}" method="POST">
         @csrf
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md">
-                        <h5 class="card-title">Create Menu</h5>
+                        <h5 class="card-title">Create Investment</h5>
                     </div>
                     <div class="col-md-auto">
                         <button class="btn btn-success" type="submmit">Save</button>
-                        <a href="{{ route('programs.index') }}" class="btn btn-secondary">Back</a>
+                        <a href="{{ route('investments.index') }}" class="btn btn-secondary">Back</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div>
-                    <label for="type">Type:</label>
-                    <select class="form-control" name="type" onchange="typeRules(this)">
-                        <option value="">Choose Type</option>
-                        <option value="parent">Parent</option>
-                        <option value="child">Child</option>
-                    </select>
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" name="name" required autocomplete="off">
                 </div><br>
                 <div>
-                    <label for="parent_id">Parent Program:</label>
-                    <select class="form-control" name="parent_id">
-                        <option value="">None</option>
-                        @foreach(\App\Models\Program::whereNull('parent_id')->get() as $parent)
-                        <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+                    <label for="investor_id">Investor:</label>
+                    <select class="form-control" name="investor_id">
+                        <option value="">Choose Investor</option>
+                        @foreach($investors as $investor)
+                            <option value="{{ $investor->id }}">
+                                {{ $investor->name_investor }}
+                            </option>
                         @endforeach
                     </select>
                 </div><br>
                 <div>
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <label for="amount">Amount:</label>
+                    <input type="number" class="form-control" name="amount" required autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                 </div><br>
                 <div>
-                    <label for="name">Route:</label>
-                    <input type="text" class="form-control" name="route">
+                    <label for="investment_date">Investment Date:</label>
+                    <input type="date" class="form-control" name="investment_date">
                 </div><br>
-                <div>
-                    <label for="description">Description:</label>
-                    <textarea class="form-control" name="description"></textarea>
-                </div><br>
-                <div>
-                    <label for="status">Status:</label>
-                    <select class="form-control" name="status">
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                </div>
             </div>
         </div>
     </form>
@@ -66,18 +66,4 @@
 
 @section('js')
 <script src="/assets/extensions/jquery/jquery.min.js"></script>
-<script>
-    function typeRules(e) {
-        var type = $(e).val()
-        if (type === 'parent') {
-            // Sembunyikan Parent Program dan Route
-            $('select[name="parent_id"]').closest('div').hide();
-            $('input[name="route"]').closest('div').hide();
-        } else if (type === 'child') {
-            // Tampilkan Parent Program dan Route
-            $('select[name="parent_id"]').closest('div').show();
-            $('input[name="route"]').closest('div').show();
-        }
-    }
-</script>
 @endsection
