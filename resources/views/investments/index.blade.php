@@ -27,8 +27,8 @@
                             <th>Amount</th>
                             <th>Investor</th>
                             <th>Investment Date</th>
-                            <th>Duration Months</th>
-                            <th>Rate of Return</th>
+                            <!-- <th>Duration Months</th>
+                            <th>Rate of Return</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -37,10 +37,10 @@
                         <tr>
                             <td>{{ $investment->name }}</td>
                             <td>{{ $investment->amount }}</td>
-                            <td>{{ $investment->investor_id }}</td>
+                            <td>{{ $investment->investor_name }}</td>
                             <td>{{ $investment->investment_date}}</td>
-                            <td>{{ $investment->duration_months }}</td>
-                            <td>{{ $investment->rate_of_return }}</td>
+                            <!-- <td>{{ $investment->duration_months }}</td>
+                            <td>{{ $investment->rate_of_return }}</td> -->
                             <td>
                                 <a class="btn btn-warning" href="{{ route('investments.edit', $investment->id) }}">Edit</a>
                                 <form action="{{ route('investments.destroy', $investment->id) }}" method="POST" style="display:inline;">
