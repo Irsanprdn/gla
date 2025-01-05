@@ -18,7 +18,7 @@ class Income extends Model
         'amount',      // amount menggantikan jumlah
         'date',        // date menggantikan tanggal
         'description', // description menggantikan deskripsi
-        'bank_id',     // bank_id
+        'bank_account_id',     // bank_account_id
     ];
 
     // Tentukan kolom yang harus di-cast (misalnya ke tipe date atau decimal)

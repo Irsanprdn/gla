@@ -12,7 +12,9 @@ class IncomeController extends Controller
     public function index()
     {
         // Mengambil semua data income beserta data bank terkait
-        $incomes = Income::with('bankAccount')->get();
+        $incomes = Income::leftJoin('bank_accounts', function ($join) {
+            $join->on('incomes.bank_account_id', '=', 'bank_accounts.id');
+        })->get(); 
         
         // Mengembalikan tampilan 'income.index' dengan data income
         return view('income.index', compact('incomes'));
@@ -33,8 +35,10 @@ class IncomeController extends Controller
     // Menampilkan form untuk menambahkan income baru
     public function create()
     {
-        $banks = BankAccount::with('bank')->get(); // Ambil semua bank untuk dropdown
-        dd($banks);
+        $banks = BankAccount::leftJoin('bank', function ($join) {
+            $join->on('bank.id_bank', '=', 'bank_accounts.bank_id');
+        })->get();
+        
         return view('income.create', compact('banks'));
     }
 
@@ -46,7 +50,7 @@ class IncomeController extends Controller
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'description' => 'nullable|string',
-            'bank_id' => 'nullable|exists:banks,id',
+            'bank_account_id' => 'nullable|numeric',
         ]);
 
         Income::create($validated);
@@ -58,7 +62,9 @@ class IncomeController extends Controller
     public function edit($id)
     {
         $income = Income::find($id);
-        $banks = BankAccount::all(); // Ambil semua bank untuk dropdown
+        $banks = BankAccount::leftJoin('bank', function ($join) {
+            $join->on('bank.id_bank', '=', 'bank_accounts.bank_id');
+        })->get();
 
         if (!$income) {
             return redirect()->route('income.index')->with('error', 'Income not found');
@@ -81,7 +87,7 @@ class IncomeController extends Controller
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'description' => 'nullable|string',
-            'bank_id' => 'required|exists:banks,id',
+            'bank_account_id' => 'nullable|numeric',
         ]);
 
         $income->update($validated);

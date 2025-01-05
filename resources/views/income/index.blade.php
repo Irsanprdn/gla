@@ -47,8 +47,8 @@
                         <tr>
                             <td>{{ $income->income_name }}</td>
                             <td>{{ $income->date }}</td>
-                            <td>{{ $income->amount }}</td>
-                            <td>{{ $income->nama_bank }}</td>
+                            <td>Rp. {{ number_format($income->amount) }}</td>
+                            <td>{{ $income->account_name }}</td>
                             <td>{{ $income->description }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('income.edit', $income->id) }}">Edit</a>

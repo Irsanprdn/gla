@@ -64,12 +64,17 @@
 <script>
     function formatAmount() {
         var amount = document.getElementById("amount").value;
-        var formattedAmount = parseFloat(amount).toLocaleString('en-US', {
-            style: 'decimal',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-        document.getElementById("formattedAmount").innerText = "Formatted Amount: " + formattedAmount;
+        var parsedAmount = parseFloat(amount);
+
+        // Jika jumlah adalah bilangan bulat, gunakan format tanpa desimal
+        var formattedAmount = Number.isInteger(parsedAmount) ?
+            parsedAmount.toLocaleString('id-ID') :
+            parsedAmount.toLocaleString('id-ID', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+        document.getElementById("formattedAmount").innerText = "Jumlah Terformat: " + formattedAmount;
     }
 </script>
 @endsection
