@@ -24,7 +24,7 @@ class Income extends Model
     // Tentukan kolom yang harus di-cast (misalnya ke tipe date atau decimal)
     protected $casts = [
         'date' => 'date',
-        'amount' => 'decimal:2', // Menentukan jumlah sebagai decimal dengan 2 desimal
+        'amount' => 'decimal:0', // Menentukan jumlah sebagai decimal dengan 2 desimal
     ];
 
     // Relasi dengan model Bank, jika ada
